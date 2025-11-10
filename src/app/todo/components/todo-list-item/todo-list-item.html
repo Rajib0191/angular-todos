@@ -1,0 +1,16 @@
+<li class="group flex items-center justify-between gap-3 rounded-md border border-zinc-800 bg-zinc-900/80 p-3 mb-1.5 hover:border-zinc-700 hover:bg-zinc-900"
+    [class.bg-zinc-900/80]="!todo.completed" [class.bg-zinc-900/40]="todo.completed" [class.opacity-70]="todo.completed"
+    [class.hover\:opacity-100]="todo.completed" [class.hover\:bg-zinc-900/60]="todo.completed">
+    <label class="flex flex-1 items-center gap-3">
+        <input type="checkbox" class="size-4 accent-indigo-500" (click)="toggleTodo(todo.id)"
+            [checked]="todo.completed" />
+        <input
+            class="flex-1 rounded-md bg-transparent px-2 py-1 ring-1 ring-transparent focus:outline-none focus:ring-zinc-700"
+            [value]="todo.title" [class.line-through]="todo.completed" [class.text-zinc-400]="todo.completed"
+            [readOnly]="todo.completed" (change)="renameTodo(todo.id, $event.target.value)" [title]="todo.title" />
+    </label>
+    <button (click)="removeTodo(todo.id)"
+        class="rounded-md border border-zinc-700 px-2 py-1 text-zinc-300 transition hover:border-zinc-500 hover:text-white">
+        ✕
+    </button>
+</li>

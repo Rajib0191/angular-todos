@@ -1,0 +1,22 @@
+<section class="flex gap-2 mt-3 mb-3 rounded-xl border border-zinc-800 bg-gray-900/60 p-3">
+  <app-button
+    label="All"
+    variant="secondary"
+    [active]="filter() === 'all'"
+    (pressed)="filter.set('all')"
+  ></app-button>
+
+  <app-button
+    label="Active"
+    variant="secondary"
+    [active]="filter() === 'active'"
+    (pressed)="filter.set('active')"
+  ></app-button>
+
+  <app-button
+    label="Completed"
+    variant="secondary"
+    [active]="filter() === 'completed'"
+    (pressed)="filter.set('completed')"
+  ></app-button>
+</section>

@@ -1,67 +1,14 @@
 <main class="min-h-screen max-w-2xl mx-auto p-6">
-  <div class="mx-auto max-w-2xl space-y-4">
-    <header class="flex items-center gap-3 pb-4">
-      <div class="grid size-10 place-items-center rounded-md bg-zinc-800">❤️</div>
-      <h1 class="text-2xl font-semibold">We Love Todos</h1>
-    </header>
-  </div>
+  <app-header headerTitle="My Task Manager"></app-header>
+  <app-todo-form></app-todo-form>
+  <app-todo-filter></app-todo-filter>
 
-  <section class="mt-4 rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4">
-    <div class="flex gap-2">
-      <input type="text"
-        class="flex-1 rounded-lg bg-zinc-900 px-3 py-2 ring-1 ring-zinc-800 focus:outline-none focus:ring-indigo-500"
-        placeholder="What needs to be done!" aria-label="New todo" [(ngModel)]="todoTitle"
-        (keyup.enter)="addTodo(todoTitle)" />
-      <button class="rounded-lg bg-indigo-600 px-4 font-medium hover:bg-indigo-500 disabled:opacity-50"
-        (click)="addTodo(todoTitle)">
-        Add
-      </button>
-    </div>
-  </section>
-
-  <section class="flex gap-2 mt-3 mb-3 rounded-xl border border-zinc-800 bg-gray-900/60 p-3">
-    <button class="text-zinc-400 btn" [class.btn-primary]="filter() === 'all'" (click)="filter.set('all')">
-      All
-    </button>
-    <button class="text-zinc-400 btn" [class.btn-primary]="filter() === 'active'" (click)="filter.set('active')">
-      Active
-    </button>
-    <button class="text-zinc-400 btn" [class.btn-primary]="filter() === 'completed'" (click)="filter.set('completed')">
-      Completed
-    </button>
-  </section>
-
-  <section class="mt-4 rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4">
-    @if (stats().total === 0) {
-    <p class="text-zinc-400">No todos found!</p>
-    }@else {
-    <div class="mb-3 flex items-center justify-between">
-      <h3 class="text-sm font-semibold text-zinc-300">Tasks</h3>
-      <span class="inline-flex items-center gap-1 rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-300">
-        {{ stats().active }} active • {{ stats().completed }} done • {{stats().total }} total</span>
-    </div>
-    }
+  <section class="mt-4 rounded-xl border border-zinc-800 bg-zinc-900/60 p-4">
+    <app-todo-list-header></app-todo-list-header>
 
     <ul role="list" class="space-y-2 max-h-80 overflow-auto pr-1">
       @for (todo of todos(); track todo.id) {
-      <li
-        class="group flex items-center justify-between gap-3 rounded-xl border border-zinc-800 bg-zinc-900/80 p-3 hover:border-zinc-700 hover:bg-zinc-900"
-        [class.bg-zinc-900/80]="!todo.completed" [class.bg-zinc-900/40]="todo.completed"
-        [class.opacity-70]="todo.completed" [class.hover\:opacity-100]="todo.completed"
-        [class.hover\:bg-zinc-900/60]="todo.completed">
-        <label class="flex flex-1 items-center gap-3">
-          <input type="checkbox" class="size-4 accent-indigo-500" (click)="toggleTodo(todo.id)"
-            [checked]="todo.completed" />
-          <input
-            class="flex-1 rounded-md bg-transparent px-2 py-1 ring-1 ring-transparent focus:outline-none focus:ring-zinc-700"
-            [value]="todo.title" [class.line-through]="todo.completed" [class.text-zinc-400]="todo.completed"
-            [readOnly]="todo.completed" (change)="renameTodo(todo.id, $event.target.value)" [title]="todo.title" />
-        </label>
-        <button (click)="removeTodo(todo.id)"
-          class="rounded-md border border-zinc-700 px-2 py-1 text-zinc-300 transition hover:border-zinc-500 hover:text-white">
-          ✕
-        </button>
-      </li>
+      <app-todo-list-item [todo]="todo"></app-todo-list-item>
       }
     </ul>
   </section>

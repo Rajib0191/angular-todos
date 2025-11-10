@@ -1,0 +1,8 @@
+<button
+  class="btn cursor-pointer transition-colors capitalize"
+  [disabled]="disabled"
+  [ngClass]="[variant, active ? 'btn-active' : '', !active ? 'btn-hover' : '']"
+  (click)="handleClick()"
+>
+  {{ label }}
+</button>
